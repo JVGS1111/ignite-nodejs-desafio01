@@ -1,0 +1,248 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Desafio 01",
+        "description": "desafio nodejs rocketseat",
+        "version": "1.0.0",
+        "contact": {
+            "email": "joaoviniciusgs@gmail.com"
+        }
+    },
+    "paths": {
+        "/users": {
+            "post": {
+                "tags": [
+                    "Users"
+                ],
+                "summary": "Create user",
+                "description": "create a new user",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "username": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "name": "name test",
+                                    "username": "usernameTest"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created"
+                    },
+                    "400": {
+                        "description": "User already exists"
+                    }
+                }
+            }
+        },
+        "/todos": {
+            "post": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Create todo",
+                "description": "Create a new todo",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "username",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "deadline": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "todo 1",
+                                    "deadline": "2023-02-02"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Todo created"
+                    },
+                    "404": {
+                        "description": "User not Found"
+                    }
+                }
+            },
+            "get": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Get all todos",
+                "description": "Get all todos",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "username",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "404": {
+                        "description": "User not found"
+                    }
+                }
+            }
+        },
+        "/todos/{id}": {
+            "put": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Update todo",
+                "description": "Update a todo",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "username",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "deadline": {
+                                        "type": "string"
+                                    }
+                                },
+                                "example": {
+                                    "title": "todo 1",
+                                    "deadline": "2023-02-02"
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Todo updated"
+                    },
+                    "404": {
+                        "description": "User not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Delete todo",
+                "description": "Delete a todo",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "username",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Todo deleted"
+                    },
+                    "404": {
+                        "description": "User not Found"
+                    }
+                }
+            }
+        },
+        "/todos/{id}/done": {
+            "patch": {
+                "tags": [
+                    "todos"
+                ],
+                "summary": "Done todo",
+                "description": "Done a todo",
+                "parameters": [
+                    {
+                        "in": "header",
+                        "name": "username",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Todo updated"
+                    },
+                    "404": {
+                        "description": "User not Found"
+                    }
+                }
+            }
+        }
+    }
+}

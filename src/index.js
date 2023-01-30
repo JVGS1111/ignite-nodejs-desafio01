@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-
+const swaggerUi = require('swagger-ui-express');
+const swaggerFile = require("./swagger.json");
 const { v4: uuidv4 } = require('uuid');
 
 const app = express();
@@ -9,6 +10,7 @@ app.use(cors());
 app.use(express.json());
 
 const users = [];
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerFile));
 
 function checksExistsUserAccount(request, response, next) {
   // Complete aqui
@@ -134,5 +136,6 @@ app.delete('/todos/:id', checksExistsUserAccount, (request, response) => {
 
   return response.status(204).send();
 });
+
 
 module.exports = app;
